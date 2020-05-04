@@ -1,0 +1,116 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+import os
+
+# El siguiente programa proporciona un gráfico de la función seno y coseno.
+
+Titulo1 = " ¿QUÉ TIPO DE FUNCIÓN QUIERES GRAFICAR? "
+Titulo2 = " ¡VUELVE PRONTO! "
+Titulo3 = " INGRESA UNA DE LAS CUATRO OPCIONES: 1, 2, 3 o 4 "
+Titulo4 = " ¿AHORA QUÉ DESEAS HACER? "
+Titulo5 = " BIENVENIDO A PLOT SENO - COSENO "
+Titulo6 = "\nEl siguiente programa permite graficar tanto la función Seno, como la función Coseno. Puedes ingresar el el dominio que desees para cada función. NOTA: el dominio debes ingresarlo en radianes. Finalmente, podrás graficar en un mismo plano ambas funciones si así lo deseas.\n"
+
+print(Titulo5.center(80,"-"))
+print(Titulo6)
+time.sleep(0.5)
+
+def Inicio():
+    while True:
+        try:
+            print(Titulo1.center(80,"-"))
+            funcion = int(input('\n   1. Sen(x)\n   2. Cos(x)\n   3. Sen(x) y Cos(x) juntos\n   4. Salir\n\n>>> '))
+            if funcion == 4:
+                print(Titulo2.center(80,"-"))
+                return time.sleep(1)
+            elif funcion == 1:
+                return Seno()
+            elif funcion == 2:
+                return Coseno()
+            elif funcion == 3:
+                return SenoCoseno()
+            if funcion < 1 or funcion > 4:
+                raise ValueError
+            break
+        except ValueError:
+            print('\n')
+            print(Titulo3.center(80,"-"))
+            print('\n')
+            time.sleep(1)
+            
+def Seno():
+    dominio1 = int(input('Ingrese el primer valor del dominio en radianes: '))
+    dominio2 = int(input('Ingrese el segundo valor del dominio en radianes: '))
+    x = np.arange(dominio1, dominio2,0.1)
+    y = np.sin(x)
+    plt.plot(x,y)
+    plt.xlabel('x')
+    plt.ylabel('y')
+    #plt.legend(['Seno'])
+    plt.title('Seno(x)')
+    plt.show()
+    return Again()
+
+def Coseno():
+    dominio3 = int(input('Ingrese el primer valor del dominio en radianes: '))
+    dominio4 = int(input('Ingrese el segundo valor del dominio en radianes: '))
+    x = np.arange(dominio3, dominio4,0.1)
+    y = np.cos(x)
+    plt.plot(x,y,'r')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    #plt.legend([''])
+    plt.title('Coseno(x)')
+    plt.show()
+    return Again()
+    
+def SenoCoseno():
+    dominio1 = int(input('Ingrese el primer valor del dominio de la función Seno(x) en radianes: '))
+    dominio2 = int(input('Ingrese el segundo valor del dominio de la función Seno(x) en radianes: '))
+    dominio3 = int(input('Ingrese el primer valor del dominio de la función Coseno(x) en radianes: '))
+    dominio4 = int(input('Ingrese el segundo valor del dominio de la función Coseno(x) en radianes: '))
+    x_seno = np.arange(dominio1, dominio2,0.1)
+    x_coseno = np.arange(dominio3, dominio4, 0.1)
+    y_seno = np.sin(x_seno)
+    y_coseno = np.cos(x_coseno)
+    plt.plot(x_seno,y_seno)
+    plt.plot(x_coseno,y_coseno,'r')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend(['Seno','Coseno'])
+    plt.title('Seno(x) y Coseno(x)')
+    plt.show()
+    return Again()
+    
+
+def Again():
+    while True:
+        try:
+            print('\n')
+            print(Titulo4.center(80,'-'))
+            print('\n')
+            funcion = int(input('   1. Graficar otra función Sen(x)\n   2. Graficar Cos(x)\n   3. Sen(x) y Cos(x) juntos\n   4. Salir\n\n>>> '))
+            if funcion == 4:
+                print(Titulo2.center(80,"-"))
+                return time.sleep(1)
+            elif funcion == 1:
+                os.system('cls')
+                return Seno()
+            elif funcion == 2:
+                os.system('cls')
+                return Coseno()
+            elif funcion == 3:
+                os.system('cls')
+                return SenoCoseno()
+            if funcion < 1 or funcion > 4:
+                raise ValueError
+            break
+        except ValueError:
+            print('\n')
+            print(Titulo3.center(80,"-"))
+            print('\n')
+            time.sleep(2)
+
+
+Inicio()
